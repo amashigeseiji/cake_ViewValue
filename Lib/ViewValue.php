@@ -12,48 +12,29 @@
 App::uses('StringValue', 'ViewValue.Lib');
 App::uses('ArrayValue', 'ViewValue.Lib');
 
-class ViewValue Implements ArrayAccess, IteratorAggregate {
-	private
-		$name = '',
-		$value = null,
-		$instance = null
-	;
+class ViewValue {
 
-	public function __construct($name, $value) {
-		$this->name = $name;
-		$this->value = $value;
-		if (is_array($value)) {
-			$this->instance = new ArrayValue($value);
-		} elseif (is_string($value)) {
-			$this->instance = new StringValue($value);
+/**
+ * factory method
+ *
+ * @param mixed $value
+ * @param string|null $name
+ * @return mixed|BaseViewValue
+ */
+	public static function factory($value, $name = null) {
+		if ($name === 'content_for_layout' ||
+			$name === 'scripts_for_layout' ||
+			is_null($value) || is_bool($value) || is_numeric($value)) {
+			return $value;
 		}
-	}
 
-	public function __call($name, $args) {
-		return $this->instance->$name($args);
-	}
-
-	public function __toString() {
-		return $this->instance->__toString();
-	}
-
-	public function getIterator() {
-		return $this->instance->getIterator();
-	}
-
-	public function offsetGet($key) {
-		return $this->instance->offsetGet($key);
-	}
-
-	public function offsetSet($key, $value = null) {
-		return $this->instance->offsetSet($key, $value);
-	}
-
-	public function offsetExists($key) {
-		return $this->instance->offsetExists($key);
-	}
-
-	public function offsetUnset($key) {
-		return $this->instance->offsetExists($key);
+		if (is_array($value)) {
+			return new ArrayValue($value);
+		} elseif (is_string($value)) {
+			return new StringValue($value);
+		} elseif ($value instanceof BaseViewValue) {
+			return $value;
+		}
+		return $value;
 	}
 }
