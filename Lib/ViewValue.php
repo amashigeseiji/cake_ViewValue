@@ -12,7 +12,7 @@
 App::uses('StringValue', 'ViewValue.Lib');
 App::uses('ArrayValue', 'ViewValue.Lib');
 
-class ViewValue extends ArrayObject {
+class ViewValue Implements ArrayAccess, IteratorAggregate {
 	private
 		$name = '',
 		$value = null,
@@ -24,7 +24,6 @@ class ViewValue extends ArrayObject {
 		$this->value = $value;
 		if (is_array($value)) {
 			$this->instance = new ArrayValue($value);
-			parent::__construct($this->instance->clean());
 		} elseif (is_string($value)) {
 			$this->instance = new StringValue($value);
 		}
@@ -44,5 +43,17 @@ class ViewValue extends ArrayObject {
 
 	public function offsetGet($key) {
 		return $this->instance->offsetGet($key);
+	}
+
+	public function offsetSet($key, $value = null) {
+		return $this->instance->offsetSet($key, $value);
+	}
+
+	public function offsetExists($key) {
+		return $this->instance->offsetExists($key);
+	}
+
+	public function offsetUnset($key) {
+		return $this->instance->offsetExists($key);
 	}
 }

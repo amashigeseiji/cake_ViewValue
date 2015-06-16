@@ -11,7 +11,7 @@
  * @version		1.0
  */
 App::uses('BaseViewValue', 'ViewValue.Lib');
-App::uses('StringViewValue', 'ViewValue.Lib');
+App::uses('StringValue', 'ViewValue.Lib');
 
 class ArrayValue extends BaseViewValue Implements ArrayAccess, IteratorAggregate {
 
@@ -24,37 +24,24 @@ class ArrayValue extends BaseViewValue Implements ArrayAccess, IteratorAggregate
  * @param array $value
  * @return array sanitized
  */
-	protected static function _sanitize(Array $value) {
-		array_walk_recursive($value, 'self::__sanitizeStringByRef');
-		return $value;
-	}
-
-/**
- * __sanitizeStringByRef
- *
- * @param string &$value
- * @return string sanitized
- * @todo sanitize object
- */
-	private static function __sanitizeStringByRef(&$value) {
+	protected static function _sanitize($value) {
 		if (is_string($value)) {
-			$value = parent::_sanitize($value);
+			return new StringValue($value);
+		} elseif (is_array($value)) {
+			return new self($value);
 		}
 		return $value;
 	}
 
 /**
- * @see BaseViewValue::doClean()
- */
-	protected function doClean($value = null) {
-		return $value ? self::_sanitizeRecursive($value) : self::_sanitizeRecursive($this->value);
-	}
-
-/**
  * getIterator
+ *
+ * generator
  */
 	public function getIterator() {
-		return new ArrayObject($this->clean());
+		foreach ($this->value as $key => $value) {
+			yield $key => $this->_sanitize($value);
+		}
 	}
 
 /**
@@ -64,7 +51,7 @@ class ArrayValue extends BaseViewValue Implements ArrayAccess, IteratorAggregate
  * @return mixed|null
  */
 	public function offsetGet($key) {
-		return $this->offsetExists($key) ? $this->clean()[$key] : null;
+		return $this->offsetExists($key) ? $this->_sanitize($this->value[$key]) : null;
 	}
 
 /**

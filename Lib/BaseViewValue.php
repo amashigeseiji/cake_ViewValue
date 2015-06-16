@@ -48,7 +48,6 @@ abstract class BaseViewValue {
  * clean
  *
  * sanitize given value
- * @param string $value
  * @return string sanitized value
  */
 	public function clean() {
@@ -56,10 +55,6 @@ abstract class BaseViewValue {
 			$this->clean = $this->_sanitize($this->value);
 		}
 		return $this->clean;
-	}
-
-	protected function doClean($value = null) {
-		return $value ? self::_sanitize($value) : self::_sanitize($this->value);
 	}
 
 /**
