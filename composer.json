@@ -1,0 +1,15 @@
+{
+    "name": "amashigeseiji/viewvalue",
+    "description": "ViewValue plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "amashige",
+            "email": "tenjuu99@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5"
+    }
+}
