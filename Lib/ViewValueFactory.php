@@ -18,13 +18,10 @@ class ViewValueFactory {
  * factory method
  *
  * @param mixed $value value
- * @param string|null $name variable name
  * @return BaseViewValue|mixed
  */
-	public static function create($value, $name = null) {
-		if ($name === 'content_for_layout' ||
-			$name === 'scripts_for_layout' ||
-			is_null($value) || is_bool($value) || is_numeric($value)) {
+	public static function create($value) {
+		if (is_null($value) || is_bool($value) || is_numeric($value)) {
 			return $value;
 		}
 
