@@ -2,6 +2,8 @@
     "name": "amashigeseiji/viewvalue",
     "description": "ViewValue plugin for CakePHP",
     "type": "cakephp-plugin",
+    "keywords": ["cakephp", "escape", "auto"],
+    "homepage": "https://github.com/amashigeseiji/cake_ViewValue",
     "license": "MIT",
     "authors": [
         {
@@ -11,5 +13,8 @@
     ],
     "require": {
         "php": ">=5.5"
+    },
+    "extra": {
+        "installer-name": "ViewValue"
     }
 }
