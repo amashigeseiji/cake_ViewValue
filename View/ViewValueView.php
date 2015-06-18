@@ -7,7 +7,6 @@
  *
  * @package		ViewValue
  * @author		Seiji Amashige <amasihge@startbahn.jp>
- * @version		1.0
  */
 
 App::uses('View', 'View');

@@ -6,7 +6,6 @@
  *
  * @package		ViewValue
  * @author		Seiji Amashige <tenjuu99@gmail.com>
- * @version		1.0
  */
 
 App::uses('ViewValueFactory', 'ViewValue.Lib');
