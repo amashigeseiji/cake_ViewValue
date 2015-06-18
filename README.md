@@ -19,7 +19,7 @@ CakePlugin::load('ViewValue');
 and in `Controller/AppController.php`:
 
 ```php
-public $viewClass = 'ViewValue.ViewValue';
+public $helpers = array('ViewValue.ViewValue');
 ```
 
 #### notice
@@ -32,7 +32,6 @@ They might to be cause of double escaping.
 This plugin convert View variable whose type is `String`/`Array`/`Object` into instance of `StringViewValue`/`ArrayViewValue`/`ObjectViewValue`.  
 They act as their original variable type.  
 If need arise, you can get raw value by calling `raw()` method in view file.  
-Or, add the line `$this->escapeFlag = false;` in your controller, this plugin's event dispatcher will not work.
 
 ## Sample code
 
