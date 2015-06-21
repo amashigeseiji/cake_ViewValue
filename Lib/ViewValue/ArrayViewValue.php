@@ -60,7 +60,7 @@ class ArrayViewValue extends BaseViewValue implements ArrayAccess, IteratorAggre
  * @return bool
  */
 	public function offsetExists($key) {
-		return isset($this->_value[$key]);
+		return array_key_exists($key, $this->_value);
 	}
 
 /**

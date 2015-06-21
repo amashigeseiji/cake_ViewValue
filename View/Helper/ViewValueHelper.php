@@ -13,16 +13,17 @@ App::uses('ViewValueFactory', 'ViewValue.Lib');
 class ViewValueHelper extends AppHelper {
 
 /**
- * isDebugKitVariable
+ * isIgnoreVariable
  *
- * @param string $name
+ * @param string $name variable name
  * @return bool
  */
-	private function isDebugKitVariable($name) {
-		if (!isset($this->isDebugKit)) {
-			$this->isDebugKit = CakePlugin::loaded('DebugKit') && Configure::read('debug');
+	private function isIgnoreVariable($name) {
+		if (!property_exists($this, 'ignore')) {
+			Configure::load('ViewValue.viewvalue');
+			$this->ignore = implode('|', Configure::read('ViewValue.ignore'));
 		}
-		return $this->isDebugKit && preg_match('/debugToolbar/', $name);
+		return preg_match('/^' . $this->ignore . '$/', $name);
 	}
 
 /**
@@ -41,7 +42,7 @@ class ViewValueHelper extends AppHelper {
 		if ($this->settings['escape']) {
 			$this->_View->isEscaped = true;
 			foreach ($this->_View->viewVars as $name => &$value) {
-				if (!$this->isDebugKitVariable($name)) {
+				if (!$this->isIgnoreVariable($name)) {
 					$value = ViewValueFactory::create($value);
 				}
 			}
