@@ -107,4 +107,22 @@ class ArrayViewValueTest extends ViewValueTestCase {
 	public function testExceptionByBool() {
 		$this->_constructorThrowExceptionBy(true);
 	}
+
+/**
+ * @test
+ */
+	public function testExceptionByOffsetSet() {
+		$this->setExpectedException('LogicException');
+		$array = $this->create(array());
+		$array['test'] = 'test';
+	}
+
+/**
+ * @test
+ */
+	public function testRemoveByOffsetUnset() {
+		$array = $this->create(array('test' => 'string'));
+		unset($array['test']);
+		$this->assertEquals(null, $array['test']);
+	}
 }
