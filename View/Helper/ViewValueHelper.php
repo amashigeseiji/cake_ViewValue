@@ -18,7 +18,7 @@ class ViewValueHelper extends AppHelper {
  * @param string $name variable name
  * @return bool
  */
-	private function isIgnoreVariable($name) {
+	private function __isIgnoreVariable($name) {
 		if (!property_exists($this, 'ignore')) {
 			Configure::load('ViewValue.viewvalue');
 			$this->ignore = implode('|', Configure::read('ViewValue.ignore'));
@@ -42,7 +42,7 @@ class ViewValueHelper extends AppHelper {
 		if ($this->settings['escape']) {
 			$this->_View->isEscaped = true;
 			foreach ($this->_View->viewVars as $name => &$value) {
-				if (!$this->isIgnoreVariable($name)) {
+				if (!$this->__isIgnoreVariable($name)) {
 					$value = ViewValueFactory::create($value);
 				}
 			}

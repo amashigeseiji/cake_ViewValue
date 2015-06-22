@@ -58,21 +58,21 @@ class ObjectViewValueTest extends ViewValueTestCase {
  * @test
  */
 	public function testExceptionByString() {
-		$this->constructorthrowExceptionBy('hoge');
+		$this->_constructorthrowExceptionBy('hoge');
 	}
 
 /**
  * @test
  */
 	public function testExceptionByNull() {
-		$this->constructorThrowExceptionBy(null);
+		$this->_constructorThrowExceptionBy(null);
 	}
 
 /**
  * @test
  */
 	public function testExceptionByBool() {
-		$this->constructorThrowExceptionBy(true);
+		$this->_constructorThrowExceptionBy(true);
 	}
 
 /**
@@ -95,8 +95,9 @@ class ObjectViewValueTest extends ViewValueTestCase {
 		$obj = new SampleObject();
 		$objInstance = $this->create($obj);
 		$this->setExpectedException('BadMethodCallException');
-		$objInstance->unCallableMethod();
+		$objInstance->_unCallableMethod();
 	}
+
 }
 
 class SampleObject {
@@ -107,7 +108,7 @@ class SampleObject {
 		return $this->value;
 	}
 
-	protected function unCallableMethod() {
+	protected function _unCallableMethod() {
 		return 'this is not callable method';
 	}
 }

@@ -91,20 +91,20 @@ class ArrayViewValueTest extends ViewValueTestCase {
  * @test
  */
 	public function testExceptionByString() {
-		$this->constructorthrowExceptionBy('hoge');
+		$this->_constructorthrowExceptionBy('hoge');
 	}
 
 /**
  * @test
  */
 	public function testExceptionByNull() {
-		$this->constructorThrowExceptionBy(null);
+		$this->_constructorThrowExceptionBy(null);
 	}
 
 /**
  * @test
  */
 	public function testExceptionByBool() {
-		$this->constructorThrowExceptionBy(true);
+		$this->_constructorThrowExceptionBy(true);
 	}
 }
