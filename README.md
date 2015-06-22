@@ -1,4 +1,5 @@
 # ViewValue Plugin for CakePHP
+[![Build Status](https://travis-ci.org/amashigeseiji/cake_ViewValue.svg?branch=dev)](https://travis-ci.org/amashigeseiji/cake_ViewValue) [![Coverage Status](https://coveralls.io/repos/amashigeseiji/cake_ViewValue/badge.svg?branch=dev)](https://coveralls.io/r/amashigeseiji/cake_ViewValue?branch=dev)
 
 This plugin let your CakePHP application secure against XSS injection by escaping View variables automatically.
 
