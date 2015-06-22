@@ -8,6 +8,7 @@ env:
   global:
     - PLUGIN_NAME=ViewValue
     - REQUIRE=""
+    - DB=mysql CAKE_VERSION=2.6
 
   matrix:
     - DB=mysql CAKE_VERSION=2.4
@@ -16,10 +17,10 @@ env:
 
 matrix:
   include:
-    - php: 5.5
+    - php: 5.4
       env:
         - COVERALLS=1
-    - php: 5.5
+    - php: 5.4
       env:
         - PHPCS=1
 
