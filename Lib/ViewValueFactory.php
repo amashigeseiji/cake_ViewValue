@@ -21,10 +21,6 @@ class ViewValueFactory {
  * @return BaseViewValue|mixed
  */
 	public static function create($value) {
-		if (is_null($value) || is_bool($value) || is_numeric($value)) {
-			return $value;
-		}
-
 		if ($value instanceof BaseViewValue) {
 			return $value;
 		}

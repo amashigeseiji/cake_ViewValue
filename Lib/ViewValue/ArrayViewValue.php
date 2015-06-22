@@ -12,7 +12,7 @@
 
 App::uses('BaseViewValue', 'ViewValue.Lib/ViewValue');
 
-class ArrayViewValue extends BaseViewValue implements ArrayAccess, IteratorAggregate {
+class ArrayViewValue extends BaseViewValue implements ArrayAccess, IteratorAggregate, Countable {
 
 	protected $_type = 'array';
 
@@ -60,7 +60,7 @@ class ArrayViewValue extends BaseViewValue implements ArrayAccess, IteratorAggre
  * @return bool
  */
 	public function offsetExists($key) {
-		return isset($this->_value[$key]);
+		return array_key_exists($key, $this->_value);
 	}
 
 /**
@@ -71,5 +71,14 @@ class ArrayViewValue extends BaseViewValue implements ArrayAccess, IteratorAggre
  */
 	public function offsetUnset($key) {
 		unset($this->_value[$key]);
+	}
+
+/**
+ * countable
+ *
+ * @return int
+ */
+	public function count() {
+		return count($this->_value);
 	}
 }
